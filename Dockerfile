@@ -1,7 +1,7 @@
 FROM python:3.9-alpine3.13
 LABEL maintainer="ajconnectprime.com"
 
-ENV PYTHONUNBUFFERED 1
+ENV PYTHONUNBUFFERED 1  
 
 COPY ./requirements.txt /tmp/requirements.txt
 COPY ./requirements.dev.txt /tmp/requirements.dev.txt
@@ -21,7 +21,7 @@ RUN python -m venv /py && \
     fi && \
     rm -rf /tmp && \
     apk del .tmp-build-deps && \
-    adduser \    
+    adduser \
         --disabled-password \
         --no-create-home \
         django-user
