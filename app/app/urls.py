@@ -15,10 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from drf_spectacular.views import ( # type: ignore
+
+from drf_spectacular.views import (   # type: ignore
     SpectacularAPIView,
     SpectacularSwaggerView,
 )
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,4 +31,5 @@ urlpatterns = [
         name='api-docs',
     ),
     path('api/user/', include('user.urls')),
+    path('api/recipe/', include('recipe.urls')),
 ]
