@@ -26,7 +26,7 @@ def create_user(email='user@example.com', password='testpass123'):
     return get_user_model().objects.create_user(email=email, password=password)
 
 
-class PublicTagsAPITests(TestCase):
+class PublicTagsApiTests(TestCase):
     """Test unauthenticated API requests."""
 
     def setUp(self):
@@ -39,7 +39,7 @@ class PublicTagsAPITests(TestCase):
         self.assertEqual(res.status_code, status.HTTP_401_UNAUTHORIZED)
 
 
-class PrivateTagsAPITests(TestCase):
+class PrivateTagsApiTests(TestCase):
     """Test authenticated API requests."""
 
     def setUp(self):

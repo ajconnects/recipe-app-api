@@ -1,5 +1,5 @@
 """
-Tests for recipe APIS.
+Tests for recipe APIs.
 """
 from decimal import Decimal
 
@@ -59,7 +59,7 @@ class PublicRecipeAPITests(TestCase):
         self.assertEqual(res.status_code, status.HTTP_401_UNAUTHORIZED)
 
 
-class PrivateRecipeAPITests(TestCase):
+class PrivateRecipeApiTests(TestCase):
     """Test authenticated API requests."""
 
     def setUp(self) -> None:
@@ -119,11 +119,11 @@ class PrivateRecipeAPITests(TestCase):
 
     def test_partial_update(self):
         """Test partial update of a recipe"""
-        original_link = 'http://example.com/recipe.pdf'
+        original_link = 'https://example.com/recipe.pdf'
         recipe = create_recipe(
             user=self.user,
             title='Sample recipe title',
-            link=original_link
+            link=original_link,
         )
 
         payload = {'title': 'New recipe title'}
@@ -147,7 +147,7 @@ class PrivateRecipeAPITests(TestCase):
 
         payload = {
             'title': 'New recipe title',
-            'link': 'https//example.com/new-recipe.pdf',
+            'link': 'https://example.com/new-recipe.pdf',
             'description': 'New recipe description',
             'time_minutes': 10,
             'price': Decimal('2.50'),
@@ -183,7 +183,7 @@ class PrivateRecipeAPITests(TestCase):
         self.assertEqual(res.status_code, status.HTTP_204_NO_CONTENT)
         self.assertFalse(Recipe.objects.filter(id=recipe.id).exists())
 
-    def test_delete_other_users_recipe_error(self):
+    def test_recipe_other_users_recipe_error(self):
         """Test trying to delete another users recipe gives error."""
         new_user = create_user(email='user2@example.com', password='test123')
         recipe = create_recipe(user=new_user)
@@ -195,12 +195,12 @@ class PrivateRecipeAPITests(TestCase):
         self.assertTrue(Recipe.objects.filter(id=recipe.id).exists())
 
     def test_create_recipe_with_new_tags(self):
-        """Tag creating a recipe with new tags."""
+        """Test creating a recipe with new tags."""
         payload = {
             'title': 'Thai Prawn Curry',
             'time_minutes': 30,
             'price': Decimal('2.50'),
-            'tags': [{'name': 'Thai'}, {'name': 'Dinner'}]
+            'tags': [{'name': 'Thai'}, {'name': 'Dinner'}],
         }
         res = self.client.post(RECIPES_URL, payload, format='json')
 
@@ -223,7 +223,7 @@ class PrivateRecipeAPITests(TestCase):
             'title': 'Pongal',
             'time_minutes': 60,
             'price': Decimal('4.50'),
-            'tags': [{'name': 'Indian'}, {'name': 'Breakfast'}]
+            'tags': [{'name': 'Indian'}, {'name': 'Breakfast'}],
         }
         res = self.client.post(RECIPES_URL, payload, format='json')
 
