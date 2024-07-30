@@ -220,7 +220,7 @@ class PrivateRecipeAPITests(TestCase):
         """Test creating a recipe with existing tag."""
         tag_indian = Tag.objects.create(user=self.user, name='Indian')
         payload = {
-            'title': 'Panga',
+            'title': 'Pongal',
             'time_minutes': 60,
             'price': Decimal('4.50'),
             'tags': [{'name': 'Indian'}, {'name': 'Breakfast'}]
