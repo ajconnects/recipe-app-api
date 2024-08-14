@@ -38,7 +38,7 @@ RUN python -m venv /py && \
     chmod -R +x /scripts
 
 #update the variable throught the path
-ENV PATH="/py/bin:$PATH"
+ENV PATH="/scripts:/py/bin:$PATH"
 
 #the last line to switch to the user create
 USER django-user
